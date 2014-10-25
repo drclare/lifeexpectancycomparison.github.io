@@ -3,12 +3,15 @@ function LifeExpectancyMen(p1,p2,p3,p4,p5,p6,p7)
 var c1=1.136010363; //first fudge factor
 var c2=3.99905; //second fudge factor
 var c3=5.85269589; //third fudge factor
-var mortality =[0.00877,0.0018696,0.0011685,0.00128535,0.007873182	0.011188807,0.013434589,0.023098581,0.032150728,0.035004372,0.047519568,0.073148804,0.10048254,0.126631637,	0.182113636,0.315259656,0.418307235,0.569840581,1];
+var mortality =[0.00877,0.0018696,0.0011685,0.00128535,0.007873182, 0.011188807,0.013434589,
+    0.023098581,0.032150728,0.035004372,0.047519568,0.073148804,0.10048254,0.126631637,
+    0.182113636,0.315259656,0.418307235,0.569840581,1];
+
 //mortality rates
-var mortality_extra;
-var lives;
-var lifeyears;
-var TotalLives;    
+var mortality_extra = [];
+var lives = [];
+var lifeyears = [];
+var TotalLives = 0;
 //assigning the first parameter to the ages 0-14    
 mortality_extra[0]=mortality[0]/p1;
 mortality_extra[1]=mortality[1]/p1;
@@ -38,25 +41,25 @@ mortality_extra[17]=mortality[17]/p7;
 mortality_extra[18]=mortality[18];
 
 lives[0]=100000;
-for (i=1, i<=18,i++){
-lives[i]=lives[i-1]*(1-moratlity_extra[i-1])
-};
+for (var i=1; i<=18; i++){
+lives[i]=lives[i-1]*(1-mortality_extra[i-1])
+}
 
 lifeyears[0]=lives[0]-(lives[0]-lives[1])/c1;
 lifeyears[1]=c2*(lives[1]-(lives[1]-lives[2])/2);
 
-for (i=2, i<1=7,i++){
+for (var i=2; i<=17;i++){
     lifeyears[i]=5*(lives[i]-(lives[i]-lives[i+1])/2)
-};    
+}
 lifeyears[18]=c3*lives[18];
 
-for (i=0, i<=18,i++){    
-TotalLives = Totallives+lifeyears[i];
+for (var i=0; i<=18;i++){
+TotalLives = TotalLives + lifeyears[i];
 }
 
-result=TotalLives/lives[0];    
+return TotalLives/lives[0];
 
 }
 
 
-result=LifeExpectancyMen(0.77,0.77,0.73,0.81,0.75,0.73	0.67);
+
